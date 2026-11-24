@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Hari Guru — Dari Tim Robotik</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --gold: #f5d08a;
+      --cyan: #38bdf8;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #07090f;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Fallback pengaman jika Tailwind lambat dimuat */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Subtle Ken Burns slow zoom on Hero Background */
+    @keyframes kenBurns {
+      0% { transform: scale(1.02) translate3d(0, 0, 0); }
+      50% { transform: scale(1.08) translate3d(-0.8%, -0.5%, 0); }
+      100% { transform: scale(1.02) translate3d(0, 0, 0); }
+    }
+
+    .bg-ken-burns {
+      animation: kenBurns 26s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Glowing Center Button Animations */
+    @keyframes pulseAura {
+      0%, 100% { transform: scale(1); opacity: 0.65; }
+      50% { transform: scale(1.18); opacity: 0.95; }
+    }
+
+    @keyframes rippleRing {
+      0% { transform: scale(0.85); opacity: 0.75; }
+      100% { transform: scale(1.85); opacity: 0; }
+    }
+
+    @keyframes slowSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .glow-aura { animation: pulseAura 3.2s ease-in-out infinite; }
+    .ripple-ring-1 { animation: rippleRing 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
+    .ripple-ring-2 { animation: rippleRing 3s cubic-bezier(0.2, 0.8, 0.2, 1) 1.5s infinite; }
+    .tech-halo { animation: slowSpin 22s linear infinite; }
+
+    .glow-button-core {
+      box-shadow:
+        0 0 28px rgba(245, 208, 138, 0.45),
+        0 0 65px rgba(56, 189, 248, 0.28),
+        inset 0 0 20px rgba(255, 255, 255, 0.35);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    .glow-button-core:hover {
+      transform: scale(1.09);
+      box-shadow:
+        0 0 42px rgba(245, 208, 138, 0.75),
+        0 0 90px rgba(56, 189, 248, 0.48),
+        inset 0 0 28px rgba(255, 255, 255, 0.6);
+    }
+
+    .glow-button-core:active { transform: scale(0.96); }
+
+    @keyframes buttonExplode {
+      0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+      45% { transform: scale(1.55); opacity: 0.9; filter: brightness(2.4); }
+      100% { transform: scale(2.4); opacity: 0; filter: brightness(3); }
+    }
+
+    .animate-button-explode {
+      animation: buttonExplode 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: none;
+    }
+
+    /* Shake Animation untuk Password Salah */
+    @keyframes modalShake {
+      0%, 100% { transform: translateX(0); }
+      18% { transform: translateX(-9px); }
+      36% { transform: translateX(9px); }
+      54% { transform: translateX(-6px); }
+      72% { transform: translateX(6px); }
+      88% { transform: translateX(-3px); }
+    }
+
+    .animate-shake {
+      animation: modalShake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    /* Gentle Floating Animation for Envelopes */
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px) rotate(var(--tilt, 0deg)); }
+      50% { transform: translateY(-9px) rotate(calc(var(--tilt, 0deg) * -0.6)); }
+    }
+
+    .envelope-float {
+      animation: floatGentle var(--float-dur, 4.6s) ease-in-out var(--float-delay, 0s) infinite;
+      will-change: transform;
+    }
+
+    /* Envelope Card Styling */
+    .envelope-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(15, 23, 42, 0.58));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(245, 208, 138, 0.28);
+      box-shadow:
+        0 14px 36px -10px rgba(0, 0, 0, 0.65),
+        0 0 24px -6px rgba(56, 189, 248, 0.18);
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease,
+                  opacity 0.35s ease;
+    }
+
+    .envelope-card:hover {
+      transform: translateY(-6px) scale(1.035);
+      border-color: rgba(245, 208, 138, 0.72);
+      box-shadow:
+        0 20px 44px -10px rgba(0, 0, 0, 0.75),
+        0 0 34px -4px rgba(245, 208, 138, 0.35),
+        0 0 18px -4px rgba(56, 189, 248, 0.35);
+    }
+
+    .envelope-card.is-opened {
+      border-color: rgba(148, 163, 184, 0.26);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(15, 23, 42, 0.48));
+    }
+
+    .envelope-card.is-opening {
+      animation: envelopePopOut 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes envelopePopOut {
+      0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+      45% { transform: scale(1.16); opacity: 0.95; filter: brightness(1.7); }
+      100% { transform: scale(0.75); opacity: 0; filter: brightness(2.2); }
+    }
+
+    .editorial-shadow {
+      text-shadow: 0 4px 28px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.55);
+    }
+
+    .letter-modal-card {
+      background: linear-gradient(160deg, rgba(20, 25, 38, 0.92), rgba(10, 14, 24, 0.96));
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(245, 208, 138, 0.3);
+      box-shadow:
+        0 30px 90px -15px rgba(0, 0, 0, 0.85),
+        0 0 50px -15px rgba(245, 208, 138, 0.2);
+    }
+
+    .polaroid-frame {
+      background: linear-gradient(180deg, #fbfaf7 0%, #f1ede4 100%);
+      box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.65);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .polaroid-frame:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.4); }
+    ::-webkit-scrollbar-thumb { background: rgba(245, 208, 138, 0.35); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(245, 208, 138, 0.6); }
+  </style>
+</head>
+<body class="min-h-screen w-full relative overflow-hidden select-none">
+
+  <!-- BACKGROUND LAYER -->
+  <div class="fixed inset-0 z-0 overflow-hidden bg-[#07090f]">
+    <img
+      id="heroBgImage"
+      src=""
+      alt="Foto Bersama Tim Robotik"
+      class="w-full h-full object-cover object-center bg-ken-burns transition-all duration-1000"
+      onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0f172a/f5d08a?text=Foto+Bersama+Tim+Robotik';"
+    />
+    <div
+      id="heroOverlay"
+      class="absolute inset-0 transition-all duration-1000"
+      style="background: radial-gradient(circle at 50% 45%, rgba(7,10,18,0.22) 0%, rgba(7,10,18,0.68) 72%, rgba(5,7,14,0.92) 100%);"
+    ></div>
+    <div
+      class="absolute inset-x-0 bottom-0 h-2/5 pointer-events-none"
+      style="background: linear-gradient(to top, rgba(5,7,14,0.88) 0%, rgba(5,7,14,0.35) 55%, transparent 100%);"
+    ></div>
+  </div>
+
+  <!-- CANVAS PARTICLE LAYER -->
+  <canvas id="particleCanvas" class="fixed inset-0 z-20 pointer-events-none w-full h-full"></canvas>
+
+  <!-- TOP BAR CONTROLS -->
+  <div class="fixed top-4 right-4 sm:top-6 sm:right-6 z-40 flex items-center gap-2.5">
+    <button
+      id="soundToggleBtn"
+      type="button"
+      title="Suara Efek (Aktif/Nonaktif)"
+      aria-label="Aktifkan atau matikan efek suara"
+      class="p-2.5 sm:p-3 rounded-full bg-slate-950/45 hover:bg-slate-900/75 border border-white/15 hover:border-amber-200/45 text-white/80 hover:text-amber-200 backdrop-blur-md transition-all duration-300 shadow-lg cursor-pointer"
+    >
+      <svg id="soundIconOn" width="20" height="20" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" />
+      </svg>
+      <svg id="soundIconOff" width="20" height="20" class="w-4 h-4 sm:w-5 sm:h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M23 9l-6 6M17 9l6 6" />
+      </svg>
+    </button>
+
+    <button
+      id="openSettingsBtn"
+      type="button"
+      title="Kustomisasi Foto & Ucapan (Dilindungi Password)"
+      aria-label="Buka panel kustomisasi"
+      class="p-2.5 sm:p-3 rounded-full bg-slate-950/45 hover:bg-slate-900/75 border border-white/15 hover:border-amber-200/45 text-white/80 hover:text-amber-200 backdrop-blur-md transition-all duration-300 shadow-lg group cursor-pointer"
+    >
+      <svg width="20" height="20" class="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 group-hover:rotate-90" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- SCENE 1: HERO EDITORIAL SCREEN -->
+  <main id="heroScene" class="relative z-10 w-full h-screen flex flex-col justify-between p-6 sm:p-10 md:p-14 transition-all duration-700">
+    <div class="flex items-center gap-3 opacity-90">
+      <span class="inline-flex h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_10px_#38bdf8] animate-pulse"></span>
+      <span id="heroTopBadge" class="text-[11px] sm:text-xs tracking-[0.28em] uppercase text-amber-100/85 font-medium">
+        Ekstrakurikuler Robotik
+      </span>
+    </div>
+
+    <!-- CENTER GLOWING BUTTON -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-4">
+      <div class="relative flex items-center justify-center pointer-events-auto">
+        <div class="absolute w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-amber-200/40 ripple-ring-1 pointer-events-none"></div>
+        <div class="absolute w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-sky-300/35 ripple-ring-2 pointer-events-none"></div>
+        <div
+          class="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full blur-2xl glow-aura pointer-events-none"
+          style="background: radial-gradient(circle, rgba(245,208,138,0.5) 0%, rgba(56,189,248,0.28) 55%, transparent 75%);"
+        ></div>
+
+        <svg width="160" height="160" class="absolute w-32 h-32 sm:w-40 sm:h-40 tech-halo pointer-events-none opacity-75" viewBox="0 0 160 160" fill="none">
+          <circle cx="80" cy="80" r="74" stroke="url(#haloGrad)" stroke-width="0.9" stroke-dasharray="6 8 2 8" />
+          <circle cx="80" cy="6" r="2.2" fill="#f5d08a" />
+          <circle cx="154" cy="80" r="2.2" fill="#38bdf8" />
+          <circle cx="80" cy="154" r="2.2" fill="#f5d08a" />
+          <circle cx="6" cy="80" r="2.2" fill="#38bdf8" />
+          <defs>
+            <linearGradient id="haloGrad" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f5d08a" />
+              <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.6" />
+              <stop offset="1" stop-color="#38bdf8" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <button
+          id="glowTriggerBtn"
+          type="button"
+          aria-label="Buka Kejutan Hari Guru"
+          class="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/15 backdrop-blur-md border border-white/50 flex items-center justify-center cursor-pointer glow-button-core group focus:outline-none focus:ring-2 focus:ring-amber-200/70"
+        >
+          <svg width="40" height="40" class="w-8 h-8 sm:w-10 sm:h-10 text-white translate-x-0.5 drop-shadow-[0_0_12px_rgba(255,255,255,0.9)] transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.5 5.25C7.5 4.36 8.48 3.82 9.23 4.29L19.48 10.79C20.18 11.23 20.18 12.27 19.48 12.71L9.23 19.21C8.48 19.68 7.5 19.14 7.5 18.25V5.25Z" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="mt-9 sm:mt-11 text-[11px] sm:text-xs tracking-[0.26em] uppercase text-white/75 editorial-shadow animate-pulse">
+        Ketuk Cahaya Untuk Membuka Surat
+      </p>
+    </div>
+
+    <!-- EDITORIAL TYPOGRAPHY -->
+    <div class="relative z-10 w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-1 sm:pb-2 pointer-events-none">
+      <div class="max-w-xl">
+        <h1
+          id="heroMainTitle"
+          class="font-serif font-light uppercase tracking-[0.06em] text-white text-4xl sm:text-6xl md:text-7xl leading-[0.95] editorial-shadow"
+        >
+          SELAMAT<br />HARI GURU!
+        </h1>
+        <div class="mt-4 sm:mt-5 flex items-center gap-3 text-white/80">
+          <span id="heroDateText" class="font-serif text-sm sm:text-base tracking-wider editorial-shadow">
+            25 November 2026
+          </span>
+          <span class="w-8 h-[1px] bg-amber-200/50"></span>
+          <span class="text-[11px] sm:text-xs tracking-[0.18em] uppercase text-amber-100/75">
+            Hadiah Spesial
+          </span>
+        </div>
+      </div>
+
+      <div class="sm:text-right sm:pb-5">
+        <p
+          id="heroRightItalic"
+          class="font-serif italic font-light text-3xl sm:text-5xl md:text-6xl text-amber-50/95 tracking-wide editorial-shadow"
+        >
+          Untuk Pembina Terbaik
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- SCENE 2: FLOATING ENVELOPES -->
+  <section
+    id="envelopesScene"
+    class="fixed inset-0 z-30 hidden flex-col justify-between px-4 sm:px-8 md:px-12 py-6 sm:py-8 overflow-y-auto"
+  >
+    <div class="w-full max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1 pr-24 sm:pr-28">
+      <div>
+        <p class="text-[10px] sm:text-xs uppercase tracking-[0.26em] text-sky-300/90 font-medium">
+          Pesan Dari Anggota Robotik
+        </p>
+        <h2 class="font-serif text-2xl sm:text-4xl text-white tracking-wide editorial-shadow">
+          Pilih Amplop Untuk Membaca Surat
+        </h2>
+      </div>
+
+      <div class="flex items-center gap-2.5 self-start sm:self-auto">
+        <div
+          id="readProgressPill"
+          class="px-4 py-2 rounded-full bg-slate-950/60 border border-amber-200/30 backdrop-blur-md text-xs sm:text-sm text-amber-100 flex items-center gap-2 shadow-lg"
+        >
+          <span class="w-2 h-2 rounded-full bg-amber-300 shadow-[0_0_8px_#fcd34d]"></span>
+          <span id="readCounterText">0 / 6 Surat Terbuka</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full max-w-6xl mx-auto my-auto py-6 sm:py-8">
+      <div id="envelopesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7"></div>
+    </div>
+
+    <div class="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 pb-2">
+      <div id="allReadNotice" class="hidden items-center gap-2.5 px-4 py-2 rounded-full bg-amber-400/15 border border-amber-300/40 text-amber-100 text-xs sm:text-sm backdrop-blur-md">
+        <span>✨</span>
+        <span>Semua surat telah dibaca! Terima kasih atas dedikasi Anda, Pembina kami.</span>
+      </div>
+
+      <div class="flex items-center gap-3 ml-auto">
+        <button
+          id="replayBtn"
+          type="button"
+          class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 hover:border-amber-200/50 text-xs sm:text-sm text-white backdrop-blur-md transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer"
+        >
+          <svg width="16" height="16" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Putar Ulang</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 3: LETTER MODAL -->
+  <div
+    id="letterModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-slate-950/75 backdrop-blur-md opacity-0 transition-opacity duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalMemberName"
+  >
+    <div
+      id="letterModalCard"
+      class="letter-modal-card relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-9 transform scale-95 translate-y-4 transition-all duration-300"
+    >
+      <button
+        id="closeModalBtn"
+        type="button"
+        aria-label="Tutup surat"
+        class="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-white/75 hover:text-white transition-all cursor-pointer z-10"
+      >
+        <svg width="20" height="20" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-7 sm:gap-9 items-center">
+        <div class="md:col-span-5 flex justify-center">
+          <div class="polaroid-frame rounded-xl p-3 pb-6 w-full max-w-[260px] sm:max-w-[280px] -rotate-2 relative">
+            <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-12 h-4 rounded-sm bg-amber-200/70 backdrop-blur-sm border border-amber-300/50 shadow-sm"></div>
+            <div class="aspect-[4/5] w-full overflow-hidden rounded-lg bg-slate-200">
+              <img
+                id="modalMemberPhoto"
+                src=""
+                alt="Foto Anggota"
+                class="w-full h-full object-cover"
+                onerror="this.onerror=null; this.src='https://placehold.co/400x500/1e293b/f5d08a?text=Anggota+Robotik';"
+              />
+            </div>
+            <div class="mt-4 text-center">
+              <p id="modalPolaroidName" class="font-serif italic text-slate-800 text-xl font-semibold leading-tight">Nama Anggota</p>
+              <p id="modalPolaroidDiv" class="text-[11px] uppercase tracking-[0.18em] text-slate-500 mt-1 font-medium">Divisi Robotik</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-7 flex flex-col justify-between text-left">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-400/10 border border-sky-300/25 text-sky-300 text-[11px] uppercase tracking-[0.2em] mb-4">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+              <span id="modalDivisionBadge">Divisi</span>
+            </div>
+            <h3 id="modalMemberName" class="font-serif text-3xl sm:text-4xl text-amber-100 leading-tight">
+              Untuk Pembina Terbaik Kami,
+            </h3>
+            <div class="w-14 h-[1px] bg-gradient-to-r from-amber-300/80 to-transparent my-4"></div>
+            <p id="modalMessageBody" class="text-slate-200/95 text-sm sm:text-base leading-relaxed font-light whitespace-pre-line">
+              Ucapan dari anggota...
+            </p>
+          </div>
+
+          <div class="mt-7 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <button id="prevLetterBtn" type="button" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-xs text-white/80 hover:text-white transition-all cursor-pointer">
+                &larr; Sebelumnya
+              </button>
+              <button id="nextLetterBtn" type="button" class="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-xs text-white/80 hover:text-white transition-all cursor-pointer">
+                Berikutnya &rarr;
+              </button>
+            </div>
+            <button id="closeModalFooterBtn" type="button" class="px-5 py-2 rounded-full bg-gradient-to-r from-amber-300/90 to-amber-200/90 hover:from-amber-200 hover:to-white text-slate-950 font-semibold text-xs sm:text-sm transition-all shadow-lg cursor-pointer">
+              Kembali ke Amplop
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD PROTECTION MODAL FOR SETTINGS -->
+  <div
+    id="passwordModal"
+    class="fixed inset-0 z-[55] hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md opacity-0 transition-opacity duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="passwordModalTitle"
+  >
+    <div
+      id="passwordModalCard"
+      class="letter-modal-card relative w-full max-w-sm rounded-3xl p-6 sm:p-7 transform scale-95 translate-y-4 transition-all duration-300"
+    >
+      <div class="flex flex-col items-center text-center mb-5">
+        <div class="w-12 h-12 rounded-2xl bg-amber-300/15 border border-amber-300/35 flex items-center justify-center text-amber-200 mb-3 shadow-[0_0_24px_rgba(245,208,138,0.2)]">
+          <svg width="24" height="24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <rect x="5" y="11" width="14" height="10" rx="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 11V7a4 4 0 118 0v4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3 id="passwordModalTitle" class="font-serif text-2xl sm:text-3xl text-amber-100">
+          Akses Pengaturan
+        </h3>
+        <p class="text-xs text-slate-400 mt-1">
+          Masukkan kata sandi untuk membuka panel kustomisasi.
+        </p>
+      </div>
+
+      <form id="passwordForm" class="space-y-4" autocomplete="off">
+        <div>
+          <div class="relative">
+            <input
+              id="passwordInput"
+              type="password"
+              placeholder="Masukkan kata sandi..."
+              class="w-full pl-4 pr-11 py-2.5 rounded-xl bg-slate-900/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-300/70 transition-colors"
+            />
+            <button
+              id="togglePasswordBtn"
+              type="button"
+              aria-label="Tampilkan atau sembunyikan kata sandi"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-amber-200 transition-colors cursor-pointer"
+            >
+              <svg id="eyeIconShow" width="18" height="18" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <svg id="eyeIconHide" width="18" height="18" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+              </svg>
+            </button>
+          </div>
+          <p id="passwordErrorMsg" class="hidden text-xs text-rose-400 mt-2 pl-1">
+            Password salah! Akses ditolak.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5 pt-1">
+          <button
+            id="cancelPasswordBtn"
+            type="button"
+            class="flex-1 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/15 text-xs text-slate-200 font-medium transition-colors cursor-pointer"
+          >
+            Batal
+          </button>
+          <button
+            type="submit"
+            class="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-300 to-amber-200 hover:from-amber-200 hover:to-white text-slate-950 text-xs font-semibold transition-all shadow-lg cursor-pointer"
+          >
+            Buka Pengaturan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CUSTOMIZATION DRAWER -->
+  <div
+    id="settingsBackdrop"
+    class="fixed inset-0 z-50 hidden bg-slate-950/65 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+  >
+    <aside
+      id="settingsDrawer"
+      class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-950/95 border-l border-white/15 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col"
+    >
+      <div class="p-5 border-b border-white/10 flex items-center justify-between">
+        <div>
+          <h3 class="font-serif text-2xl text-amber-100">Panel Kustomisasi</h3>
+          <p class="text-xs text-slate-400">Ubah foto, judul, dan ucapan secara langsung</p>
+        </div>
+        <button
+          id="closeSettingsBtn"
+          type="button"
+          class="p-2 rounded-full bg-white/5 hover:bg-white/15 text-slate-300 hover:text-white cursor-pointer"
+        >
+          <svg width="20" height="20" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-5 space-y-6 text-sm">
+        <div class="space-y-3 bg-white/[0.03] p-4 rounded-2xl border border-white/10">
+          <h4 class="text-xs uppercase tracking-[0.2em] text-amber-200 font-semibold">Tampilan Utama</h4>
+
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">Foto Bersama (URL atau Unggah)</label>
+            <input id="cfgHeroPhotoUrl" type="text" placeholder="https://..." class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            <label class="mt-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-sky-500/15 hover:bg-sky-500/25 border border-sky-400/30 text-sky-300 text-xs cursor-pointer transition-colors">
+              <span>📁 Pilih Foto dari Perangkat</span>
+              <input id="cfgHeroPhotoFile" type="file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Judul Baris 1</label>
+              <input id="cfgTitleLine1" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            </div>
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Judul Baris 2</label>
+              <input id="cfgTitleLine2" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Teks Kanan (Italic)</label>
+              <input id="cfgRightItalic" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            </div>
+            <div>
+              <label class="block text-xs text-slate-300 mb-1">Tanggal</label>
+              <input id="cfgDateText" type="text" class="w-full px-3 py-2 rounded-xl bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs uppercase tracking-[0.2em] text-amber-200 font-semibold">Daftar Surat Anggota</h4>
+            <button id="addMemberBtn" type="button" class="px-3 py-1.5 rounded-lg bg-amber-300/15 hover:bg-amber-300/25 border border-amber-300/35 text-amber-200 text-xs font-medium cursor-pointer transition-colors">
+              + Tambah Anggota
+            </button>
+          </div>
+          <div id="settingsMembersList" class="space-y-3"></div>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-white/10 bg-slate-950/90 flex items-center justify-between gap-2">
+        <button id="copyConfigBtn" type="button" class="flex-1 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs text-white font-medium cursor-pointer transition-colors">
+          📋 Salin Data JSON
+        </button>
+        <button id="applySettingsBtn" type="button" class="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-300 to-amber-200 hover:from-amber-200 hover:to-white text-slate-950 text-xs font-semibold cursor-pointer transition-colors">
+          Simpan & Terapkan
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div
+    id="toastMessage"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] px-5 py-2.5 rounded-full bg-slate-900/95 border border-amber-300/40 text-amber-100 text-xs sm:text-sm shadow-2xl backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 translate-y-3"
+  >
+    Tersimpan!
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. KONFIGURASI UTAMA & PASSWORD PENGATURAN
+       ========================================================================= */
+    const SETTINGS_PASSWORD = "Robotik27";
+    const STORAGE_KEY = "hari_guru_robotik_config_v1";
+
+    let CONFIG = {
+  "teamBadge": "Ekstrakurikuler Robotik",
+  "titleLine1": "SELAMAT",
+  "titleLine2": "HARI GURU!",
+  "rightItalic": "Untuk Pak Rohman",
+  "dateText": "25 November 2026",
+  "heroPhoto": "https://c.termai.cc/i189/JPaA.jpg",
+  "members": [
+    {
+      "id": 1,
+      "name": "Rifan Aulal Arifin",
+      "division": "Ketua Robotik",
+      "photo": "https://c.termai.cc/i126/DRXf.jpg",
+      "message": "Selamat hari guru pak, mohon maaf pak jika saya kurang sebaik yang lainnya, saya sudah membebani bapak, mulai dari lomba hingga hal lainnya, saya adalah tipikal orang yang tidak bisa fokus dalam 1 tujuan dengan waktu lama, dan saya juga tipikal orang yg butuh belajar untuk mengerti sesuatu hal, maka dari itu saya mengikuti 2 ekskul, untuk mempelari rundown acara bagaimana yg bagus untuk di terapkan di robotik, dan sejujurnya saya cenderung bisa menyarankan bukan mewakilkan, jdi jika selama saya menjabat menjadi ketua mohon maaf bila ada kekeliruan ataupun ketidak becusan, karna saya masih belajar, semoga ilmu yang bapak ajari ke kita selalu bermanfaat🙏"
+    },
+    {
+      "id": 2,
+      "name": "ksatria andi pamungkas",
+      "division": "Wakil Robotik",
+      "photo": "https://c.termai.cc/i162/4lW.jpg",
+      "message": "Selamat Hari Guru Nasional, Pak Rohman. Terima kasih atas dedikasi dan bimbingan luar biasa yang Bapak berikan kepada kami di ekstrakurikuler robotik. Arahan dan kesabaran Bapak sangat berarti bagi perkembangan kami sebagai pengurus baru. Semoga Bapak selalu sehat, bahagia, dan terus menginspirasi kami semua."
+    },
+    {
+      "id": 3,
+      "name": "Muhammad Damar Agus Dutawan",
+      "division": "Alumni Ekskul Robotika",
+      "photo": "https://c.termai.cc/i100/uD94j0.jpg",
+      "message": "Assalamualaikum pak, salam dari ITS. Saya mau ucapin makasih sebanyak2nya karna udh ngebimbing saya dalam materi2 robotika, g kerasa klo ilmunya kepake bgt sampe sini. Trs mksh juga udh ngsh kepercayaan buat jd ketua, karna kombinasi ilmu antara kepemimpinan + robotika nya ke asah bgt, dan ilmuny bakal lestari. Sekali lagi makasih banyak pak, selamat hari guru ❤️❤️!"
+    },
+    {
+      "id": 4,
+      "name": "Seluruh Anggota Robotik",
+      "division": "Anggota Robotika",
+      "photo": "https://c.termai.cc/i171/J7O.png",
+      "message": "Selamat Hari Guru Nasional, Pak Rohman. Terima kasih yang sebesar-besarnya atas segala dedikasi, kesabaran, dan bimbingan luar biasa yang Bapak berikan kepada kami di ekstrakurikuler robotik, karena setiap arahan Bapak sangat berarti bagi proses belajar dan perkembangan kami. Kami juga memohon maaf yang tulus apabila selama ini masih terdapat banyak kekeliruan, kekurangan, ataupun sempat merepotkan Bapak, sebab kami sadar masing-masing dari kami masih terus belajar membagi fokus serta memahami cara terbaik untuk berkontribusi di tim ini. Semoga segala ilmu yang Bapak ajarkan kepada kami selalu bermanfaat, dan semoga Pak Rohman senantiasa diberikan kesehatan, kebahagiaan, serta terus menjadi inspirasi bagi kami semua. 🙏✨"
+    }
+  ]
+    };
+
+    // Muat konfigurasi tersimpan dari localStorage jika ada
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && Array.isArray(parsed.members) && parsed.members.length > 0) {
+          CONFIG = { ...CONFIG, ...parsed };
+        }
+      }
+    } catch (e) {}
+
+    /* =========================================================================
+       2. STATE MANAGEMENT
+       ========================================================================= */
+    const state = {
+      scene: "hero",
+      openedIds: new Set(),
+      activeMemberIndex: 0,
+      soundEnabled: true,
+      allReadCelebrated: false
+    };
+
+    /* =========================================================================
+       3. WEB AUDIO SYNTHESIZER
+       ========================================================================= */
+    let audioCtx = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playExplosionSound() {
+      if (!state.soundEnabled) return;
+      try {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(160, now);
+        osc.frequency.exponentialRampToValueAtTime(38, now + 0.55);
+        gain.gain.setValueAtTime(0.22, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.65);
+
+        const notes = [523.25, 659.25, 783.99, 1046.5, 1318.5];
+        notes.forEach((freq, idx) => {
+          const chime = ctx.createOscillator();
+          const chimeGain = ctx.createGain();
+          chime.type = "triangle";
+          chime.frequency.setValueAtTime(freq, now + idx * 0.055);
+          chimeGain.gain.setValueAtTime(0.001, now + idx * 0.055);
+          chimeGain.gain.linearRampToValueAtTime(0.08, now + idx * 0.055 + 0.03);
+          chimeGain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.055 + 0.85);
+          chime.connect(chimeGain);
+          chimeGain.connect(ctx.destination);
+          chime.start(now + idx * 0.055);
+          chime.stop(now + idx * 0.055 + 0.9);
+        });
+      } catch (err) {}
+    }
+
+    function playEnvelopeSound() {
+      if (!state.soundEnabled) return;
+      try {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        [587.33, 880].forEach((f, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(f, now + i * 0.06);
+          gain.gain.setValueAtTime(0.001, now + i * 0.06);
+          gain.gain.linearRampToValueAtTime(0.075, now + i * 0.06 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0008, now + i * 0.06 + 0.55);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + i * 0.06);
+          osc.stop(now + i * 0.06 + 0.6);
+        });
+      } catch (err) {}
+    }
+
+    /* =========================================================================
+       4. HTML5 CANVAS PARTICLE ENGINE
+       ========================================================================= */
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    let cw = window.innerWidth;
+    let ch = window.innerHeight;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const ambientParticles = [];
+    const burstParticles = [];
+    const shockwaves = [];
+
+    const PALETTE = [
+      { r: 245, g: 208, b: 138 },
+      { r: 56, g: 189, b: 248 },
+      { r: 255, g: 255, b: 255 },
+      { r: 253, g: 230, b: 138 }
+    ];
+
+    function resizeCanvas() {
+      cw = window.innerWidth;
+      ch = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = cw * dpr;
+      canvas.height = ch * dpr;
+      canvas.style.width = cw + "px";
+      canvas.style.height = ch + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function initAmbientParticles() {
+      ambientParticles.length = 0;
+      const count = Math.min(48, Math.floor((cw * ch) / 28000));
+      for (let i = 0; i < count; i++) {
+        const col = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+        ambientParticles.push({
+          x: Math.random() * cw,
+          y: Math.random() * ch,
+          r: Math.random() * 1.8 + 0.6,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: -Math.random() * 0.35 - 0.08,
+          alpha: Math.random() * 0.55 + 0.15,
+          phase: Math.random() * Math.PI * 2,
+          color: col
+        });
+      }
+    }
+
+    function spawnExplosion(x, y, count = 135, power = 1) {
+      shockwaves.push({
+        x, y, radius: 10,
+        maxRadius: Math.max(cw, ch) * (power > 0.8 ? 0.48 : 0.18),
+        alpha: 0.85,
+        lineWidth: power > 0.8 ? 3.5 : 2,
+        color: "rgba(245, 208, 138,"
+      });
+
+      if (power > 0.8) {
+        shockwaves.push({
+          x, y, radius: 5,
+          maxRadius: Math.max(cw, ch) * 0.34,
+          alpha: 0.65,
+          lineWidth: 2,
+          color: "rgba(56, 189, 248,"
+        });
+      }
+
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = (Math.random() * 9.5 + 1.8) * power;
+        const col = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+        burstParticles.push({
+          x, y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: (Math.random() * 3.2 + 1.1) * (power > 0.8 ? 1 : 0.85),
+          alpha: 1,
+          decay: Math.random() * 0.014 + 0.008,
+          friction: 0.965,
+          gravity: 0.045,
+          color: col,
+          isStar: Math.random() < 0.24,
+          twinkle: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function drawStar(cx, cy, size, fillStyle) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.fillStyle = fillStyle;
+      ctx.beginPath();
+      for (let i = 0; i < 4; i++) {
+        const a = (i * Math.PI) / 2;
+        ctx.lineTo(Math.cos(a) * size * 2.1, Math.sin(a) * size * 2.1);
+        ctx.lineTo(Math.cos(a + Math.PI / 4) * size * 0.45, Math.sin(a + Math.PI / 4) * size * 0.45);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, cw, ch);
+
+      for (let i = 0; i < ambientParticles.length; i++) {
+        const p = ambientParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.phase += 0.02;
+        if (p.y < -10) p.y = ch + 10;
+        if (p.x < -10) p.x = cw + 10;
+        if (p.x > cw + 10) p.x = -10;
+        const a = p.alpha * (0.65 + 0.35 * Math.sin(p.phase));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${a})`;
+        ctx.fill();
+      }
+
+      for (let i = shockwaves.length - 1; i >= 0; i--) {
+        const sw = shockwaves[i];
+        sw.radius += (sw.maxRadius - sw.radius) * 0.085;
+        sw.alpha *= 0.935;
+        sw.lineWidth *= 0.97;
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `${sw.color} ${sw.alpha})`;
+        ctx.lineWidth = Math.max(0.5, sw.lineWidth);
+        ctx.stroke();
+        if (sw.alpha < 0.015) shockwaves.splice(i, 1);
+      }
+
+      ctx.globalCompositeOperation = "lighter";
+      for (let i = burstParticles.length - 1; i >= 0; i--) {
+        const p = burstParticles[i];
+        p.vx *= p.friction;
+        p.vy = p.vy * p.friction + p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= p.decay;
+        p.twinkle += 0.18;
+        if (p.alpha <= 0) {
+          burstParticles.splice(i, 1);
+          continue;
+        }
+        const flicker = 0.72 + 0.28 * Math.sin(p.twinkle);
+        const finalAlpha = Math.max(0, p.alpha * flicker);
+        const rgba = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${finalAlpha})`;
+        if (p.isStar) {
+          drawStar(p.x, p.y, p.size, rgba);
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = rgba;
+          ctx.fill();
+        }
+      }
+      ctx.globalCompositeOperation = "source-over";
+      requestAnimationFrame(animateCanvas);
+    }
+
+    /* =========================================================================
+       5. RENDERING HERO & ENVELOPES
+       ========================================================================= */
+    const heroBgImage = document.getElementById("heroBgImage");
+    const heroOverlay = document.getElementById("heroOverlay");
+    const heroTopBadge = document.getElementById("heroTopBadge");
+    const heroMainTitle = document.getElementById("heroMainTitle");
+    const heroDateText = document.getElementById("heroDateText");
+    const heroRightItalic = document.getElementById("heroRightItalic");
+    const heroScene = document.getElementById("heroScene");
+    const glowTriggerBtn = document.getElementById("glowTriggerBtn");
+
+    const envelopesScene = document.getElementById("envelopesScene");
+    const envelopesGrid = document.getElementById("envelopesGrid");
+    const readCounterText = document.getElementById("readCounterText");
+    const allReadNotice = document.getElementById("allReadNotice");
+
+    function renderHeroContent() {
+      heroBgImage.src = CONFIG.heroPhoto;
+      heroTopBadge.textContent = CONFIG.teamBadge;
+      heroMainTitle.innerHTML = `${escapeHtml(CONFIG.titleLine1)}<br />${escapeHtml(CONFIG.titleLine2)}`;
+      heroDateText.textContent = CONFIG.dateText;
+      heroRightItalic.textContent = CONFIG.rightItalic;
+    }
+
+    function updateReadCounter() {
+      const total = CONFIG.members.length;
+      const opened = CONFIG.members.filter((m) => state.openedIds.has(m.id)).length;
+      readCounterText.textContent = `${opened} / ${total} Surat Terbuka`;
+
+      if (total > 0 && opened === total) {
+        allReadNotice.classList.remove("hidden");
+        allReadNotice.classList.add("flex");
+        if (!state.allReadCelebrated) {
+          state.allReadCelebrated = true;
+          spawnExplosion(cw * 0.5, ch * 0.35, 95, 0.85);
+        }
+      } else {
+        allReadNotice.classList.add("hidden");
+        allReadNotice.classList.remove("flex");
+      }
+    }
+
+    function renderEnvelopes(animateFromCenter = false) {
+      envelopesGrid.innerHTML = "";
+      updateReadCounter();
+
+      CONFIG.members.forEach((member, index) => {
+        const isOpened = state.openedIds.has(member.id);
+        const tilt = ((index % 2 === 0 ? -1 : 1) * (1.2 + (index % 3) * 0.5)).toFixed(1);
+        const floatDur = (4.2 + (index % 3) * 0.7).toFixed(1);
+        const floatDelay = (index * 0.25).toFixed(2);
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "envelope-wrapper transition-all duration-700 ease-out";
+        if (animateFromCenter) {
+          wrapper.style.opacity = "0";
+          wrapper.style.transform = "scale(0.25) translateY(35px)";
+        }
+
+        wrapper.innerHTML = `
+          <button
+            type="button"
+            data-index="${index}"
+            class="envelope-card envelope-float w-full text-left rounded-2xl p-5 sm:p-6 relative overflow-hidden cursor-pointer group ${isOpened ? "is-opened" : ""}"
+            style="--tilt: ${tilt}deg; --float-dur: ${floatDur}s; --float-delay: ${floatDelay}s;"
+          >
+            <svg class="absolute top-0 left-0 w-full h-14 pointer-events-none opacity-35 group-hover:opacity-60 transition-opacity" preserveAspectRatio="none" viewBox="0 0 300 60" fill="none">
+              <path d="M0 0 L150 48 L300 0" stroke="url(#envGrad${index})" stroke-width="1.2" />
+              <defs>
+                <linearGradient id="envGrad${index}" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#38bdf8" stop-opacity="0.3" />
+                  <stop offset="0.5" stop-color="#f5d08a" stop-opacity="0.95" />
+                  <stop offset="1" stop-color="#38bdf8" stop-opacity="0.3" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div class="relative z-10 flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center border ${
+                isOpened
+                  ? "bg-slate-800/70 border-slate-400/30 text-slate-300"
+                  : "bg-gradient-to-br from-amber-300/25 to-sky-400/20 border-amber-200/50 text-amber-200 shadow-[0_0_15px_rgba(245,208,138,0.28)]"
+              }">
+                ${
+                  isOpened
+                    ? `<svg width="20" height="20" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 19V9a2 2 0 01.88-1.66l7-4.67a2 2 0 012.24 0l7 4.67A2 2 0 0121 9v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 9l9 6 9-6"/></svg>`
+                    : `<svg width="20" height="20" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+                }
+              </div>
+
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] uppercase tracking-[0.16em] font-medium ${
+                isOpened
+                  ? "bg-emerald-400/10 text-emerald-300 border border-emerald-400/25"
+                  : "bg-amber-300/15 text-amber-200 border border-amber-300/35"
+              }">
+                <span class="w-1.5 h-1.5 rounded-full ${isOpened ? "bg-emerald-400" : "bg-amber-300 animate-pulse"}"></span>
+                ${isOpened ? "Terbuka" : "Surat Baru"}
+              </span>
+            </div>
+
+            <div class="relative z-10">
+              <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300/90 font-medium">
+                ${escapeHtml(member.division)}
+              </p>
+              <h3 class="font-serif text-2xl sm:text-[26px] text-white mt-0.5 group-hover:text-amber-100 transition-colors">
+                ${escapeHtml(member.name)}
+              </h3>
+              <p class="text-xs text-slate-300/75 mt-2 flex items-center gap-1.5">
+                <span>${isOpened ? "Ketuk untuk membaca kembali" : "Ketuk untuk membuka surat"}</span>
+                <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+              </p>
+            </div>
+          </button>
+        `;
+
+        const btn = wrapper.querySelector("button");
+        btn.addEventListener("click", () => handleEnvelopeClick(index, btn));
+        envelopesGrid.appendChild(wrapper);
+
+        if (animateFromCenter) {
+          setTimeout(() => {
+            wrapper.style.opacity = "1";
+            wrapper.style.transform = "scale(1) translateY(0)";
+          }, 90 + index * 95);
+        }
+      });
+    }
+
+    /* =========================================================================
+       6. INTERACTION FLOW
+       ========================================================================= */
+    function triggerMainExplosion() {
+      if (state.scene !== "hero") return;
+      const rect = glowTriggerBtn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      playExplosionSound();
+      spawnExplosion(cx, cy, 165, 1.15);
+
+      glowTriggerBtn.classList.add("animate-button-explode");
+      heroScene.style.opacity = "0";
+      heroScene.style.transform = "scale(1.04)";
+      heroScene.style.pointerEvents = "none";
+
+      heroOverlay.style.background =
+        "radial-gradient(circle at 50% 45%, rgba(7,10,18,0.52) 0%, rgba(7,10,18,0.82) 72%, rgba(5,7,14,0.95) 100%)";
+
+      setTimeout(() => {
+        state.scene = "envelopes";
+        heroScene.classList.add("hidden");
+        envelopesScene.classList.remove("hidden");
+        envelopesScene.classList.add("flex");
+        renderEnvelopes(true);
+      }, 420);
+    }
+
+    function replayExperience() {
+      state.scene = "hero";
+      state.allReadCelebrated = false;
+
+      envelopesScene.classList.add("hidden");
+      envelopesScene.classList.remove("flex");
+
+      heroScene.classList.remove("hidden");
+      heroScene.style.opacity = "1";
+      heroScene.style.transform = "scale(1)";
+      heroScene.style.pointerEvents = "auto";
+
+      glowTriggerBtn.classList.remove("animate-button-explode");
+      heroOverlay.style.background =
+        "radial-gradient(circle at 50% 45%, rgba(7,10,18,0.22) 0%, rgba(7,10,18,0.68) 72%, rgba(5,7,14,0.92) 100%)";
+    }
+
+    function handleEnvelopeClick(index, buttonEl) {
+      const rect = buttonEl.getBoundingClientRect();
+      playEnvelopeSound();
+      spawnExplosion(rect.left + rect.width / 2, rect.top + rect.height / 2, 55, 0.58);
+      buttonEl.classList.add("is-opening");
+      setTimeout(() => openLetterModal(index), 280);
+    }
+
+    /* =========================================================================
+       7. LETTER MODAL LOGIC
+       ========================================================================= */
+    const letterModal = document.getElementById("letterModal");
+    const letterModalCard = document.getElementById("letterModalCard");
+    const modalMemberPhoto = document.getElementById("modalMemberPhoto");
+    const modalPolaroidName = document.getElementById("modalPolaroidName");
+    const modalPolaroidDiv = document.getElementById("modalPolaroidDiv");
+    const modalDivisionBadge = document.getElementById("modalDivisionBadge");
+    const modalMemberName = document.getElementById("modalMemberName");
+    const modalMessageBody = document.getElementById("modalMessageBody");
+
+    function populateModal(index) {
+      const member = CONFIG.members[index];
+      if (!member) return;
+      state.activeMemberIndex = index;
+      state.openedIds.add(member.id);
+      modalMemberPhoto.src = member.photo;
+      modalPolaroidName.textContent = member.name;
+      modalPolaroidDiv.textContent = member.division;
+      modalDivisionBadge.textContent = member.division;
+      modalMemberName.textContent = `Dari ${member.name}`;
+      modalMessageBody.textContent = member.message;
+    }
+
+    function openLetterModal(index) {
+      populateModal(index);
+      letterModal.classList.remove("hidden");
+      letterModal.classList.add("flex");
+      requestAnimationFrame(() => {
+        letterModal.style.opacity = "1";
+        letterModalCard.style.transform = "scale(1) translateY(0)";
+      });
+    }
+
+    function closeLetterModal() {
+      letterModal.style.opacity = "0";
+      letterModalCard.style.transform = "scale(0.95) translateY(16px)";
+      setTimeout(() => {
+        letterModal.classList.add("hidden");
+        letterModal.classList.remove("flex");
+        if (state.scene === "envelopes") renderEnvelopes(false);
+      }, 260);
+    }
+
+    function navigateLetter(direction) {
+      if (CONFIG.members.length === 0) return;
+      const nextIdx = (state.activeMemberIndex + direction + CONFIG.members.length) % CONFIG.members.length;
+      playEnvelopeSound();
+      populateModal(nextIdx);
+    }
+
+    /* =========================================================================
+       8. PASSWORD MODAL LOGIC (PROTEKSI PENGATURAN)
+       ========================================================================= */
+    const passwordModal = document.getElementById("passwordModal");
+    const passwordModalCard = document.getElementById("passwordModalCard");
+    const passwordForm = document.getElementById("passwordForm");
+    const passwordInput = document.getElementById("passwordInput");
+    const passwordErrorMsg = document.getElementById("passwordErrorMsg");
+    const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+    const eyeIconShow = document.getElementById("eyeIconShow");
+    const eyeIconHide = document.getElementById("eyeIconHide");
+
+    function openPasswordModal() {
+      passwordInput.value = "";
+      passwordInput.type = "password";
+      eyeIconShow.classList.remove("hidden");
+      eyeIconHide.classList.add("hidden");
+      passwordErrorMsg.classList.add("hidden");
+      passwordModalCard.classList.remove("animate-shake");
+
+      passwordModal.classList.remove("hidden");
+      passwordModal.classList.add("flex");
+      requestAnimationFrame(() => {
+        passwordModal.style.opacity = "1";
+        passwordModalCard.style.transform = "scale(1) translateY(0)";
+        setTimeout(() => passwordInput.focus(), 80);
+      });
+    }
+
+    function closePasswordModal() {
+      passwordModal.style.opacity = "0";
+      passwordModalCard.style.transform = "scale(0.95) translateY(16px)";
+      setTimeout(() => {
+        passwordModal.classList.add("hidden");
+        passwordModal.classList.remove("flex");
+      }, 240);
+    }
+
+    togglePasswordBtn.addEventListener("click", () => {
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      eyeIconShow.classList.toggle("hidden", isHidden);
+      eyeIconHide.classList.toggle("hidden", !isHidden);
+      passwordInput.focus();
+    });
+
+    passwordInput.addEventListener("input", () => {
+      passwordErrorMsg.classList.add("hidden");
+    });
+
+    passwordForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (passwordInput.value === SETTINGS_PASSWORD) {
+        closePasswordModal();
+        setTimeout(() => openSettings(), 240);
+      } else {
+        passwordErrorMsg.classList.remove("hidden");
+        passwordModalCard.classList.remove("animate-shake");
+        void passwordModalCard.offsetWidth; // trigger reflow agar animasi bisa diulang
+        passwordModalCard.classList.add("animate-shake");
+        passwordInput.select();
+      }
+    });
+
+    document.getElementById("cancelPasswordBtn").addEventListener("click", closePasswordModal);
+    passwordModal.addEventListener("click", (e) => {
+      if (e.target === passwordModal) closePasswordModal();
+    });
+
+    /* =========================================================================
+       9. LIVE CUSTOMIZATION PANEL (DRAWER)
+       ========================================================================= */
+    const settingsBackdrop = document.getElementById("settingsBackdrop");
+    const settingsDrawer = document.getElementById("settingsDrawer");
+    const settingsMembersList = document.getElementById("settingsMembersList");
+
+    const cfgHeroPhotoUrl = document.getElementById("cfgHeroPhotoUrl");
+    const cfgHeroPhotoFile = document.getElementById("cfgHeroPhotoFile");
+    const cfgTitleLine1 = document.getElementById("cfgTitleLine1");
+    const cfgTitleLine2 = document.getElementById("cfgTitleLine2");
+    const cfgRightItalic = document.getElementById("cfgRightItalic");
+    const cfgDateText = document.getElementById("cfgDateText");
+
+    let draftMembers = [];
+
+    function openSettings() {
+      cfgHeroPhotoUrl.value = CONFIG.heroPhoto;
+      cfgTitleLine1.value = CONFIG.titleLine1;
+      cfgTitleLine2.value = CONFIG.titleLine2;
+      cfgRightItalic.value = CONFIG.rightItalic;
+      cfgDateText.value = CONFIG.dateText;
+
+      draftMembers = CONFIG.members.map((m) => ({ ...m }));
+      renderSettingsMembers();
+
+      settingsBackdrop.classList.remove("hidden");
+      requestAnimationFrame(() => {
+        settingsBackdrop.style.opacity = "1";
+        settingsDrawer.style.transform = "translateX(0)";
+      });
+    }
+
+    function closeSettings() {
+      settingsBackdrop.style.opacity = "0";
+      settingsDrawer.style.transform = "translateX(100%)";
+      setTimeout(() => {
+        settingsBackdrop.classList.add("hidden");
+      }, 280);
+    }
+
+    function renderSettingsMembers() {
+      settingsMembersList.innerHTML = "";
+      draftMembers.forEach((member, idx) => {
+        const card = document.createElement("div");
+        card.className = "p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2.5";
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-sky-300">Anggota #${idx + 1}</span>
+            <button type="button" data-del="${idx}" class="text-[11px] text-rose-400 hover:text-rose-300 cursor-pointer">Hapus</button>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" data-field="name" data-idx="${idx}" value="${escapeAttr(member.name)}" placeholder="Nama" class="px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            <input type="text" data-field="division" data-idx="${idx}" value="${escapeAttr(member.division)}" placeholder="Divisi" class="px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+          </div>
+          <div>
+            <input type="text" data-field="photo" data-idx="${idx}" value="${escapeAttr(member.photo)}" placeholder="URL Foto Anggota" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60" />
+            <label class="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/5 hover:bg-white/10 border border-white/15 text-[11px] text-slate-300 cursor-pointer">
+              <span>📷 Unggah Foto</span>
+              <input type="file" accept="image/*" data-file-idx="${idx}" class="hidden" />
+            </label>
+          </div>
+          <textarea rows="3" data-field="message" data-idx="${idx}" placeholder="Ucapan Hari Guru..." class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-white/15 text-xs text-white focus:outline-none focus:border-amber-300/60 resize-y">${escapeHtml(member.message)}</textarea>
+        `;
+        settingsMembersList.appendChild(card);
+      });
+
+      settingsMembersList.querySelectorAll("[data-field]").forEach((input) => {
+        input.addEventListener("input", (e) => {
+          draftMembers[Number(e.target.dataset.idx)][e.target.dataset.field] = e.target.value;
+        });
+      });
+
+      settingsMembersList.querySelectorAll("[data-file-idx]").forEach((fileInput) => {
+        fileInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const i = Number(e.target.dataset.fileIdx);
+          draftMembers[i].photo = URL.createObjectURL(file);
+          renderSettingsMembers();
+          showToast("Foto anggota diperbarui untuk pratinjau!");
+        });
+      });
+
+      settingsMembersList.querySelectorAll("[data-del]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          if (draftMembers.length <= 1) {
+            showToast("Minimal harus ada 1 surat anggota.");
+            return;
+          }
+          draftMembers.splice(Number(e.target.dataset.del), 1);
+          renderSettingsMembers();
+        });
+      });
+    }
+
+    function applySettings() {
+      CONFIG.heroPhoto = cfgHeroPhotoUrl.value.trim() || CONFIG.heroPhoto;
+      CONFIG.titleLine1 = cfgTitleLine1.value.trim() || "SELAMAT";
+      CONFIG.titleLine2 = cfgTitleLine2.value.trim() || "HARI GURU!";
+      CONFIG.rightItalic = cfgRightItalic.value.trim() || "Untuk Pembina Terbaik";
+      CONFIG.dateText = cfgDateText.value.trim() || "25 November 2026";
+      CONFIG.members = draftMembers.map((m, idx) => ({ ...m, id: m.id || Date.now() + idx }));
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(CONFIG));
+      } catch (e) {}
+
+      renderHeroContent();
+      if (state.scene === "envelopes") renderEnvelopes(false);
+      closeSettings();
+      showToast("Perubahan berhasil disimpan & diterapkan!");
+    }
+
+    function copyConfigJson() {
+      try {
+        const tempTextarea = document.createElement("textarea");
+        tempTextarea.value = JSON.stringify(CONFIG, null, 2);
+        tempTextarea.style.position = "fixed";
+        tempTextarea.style.opacity = "0";
+        document.body.appendChild(tempTextarea);
+        tempTextarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempTextarea);
+        showToast("Data konfigurasi JSON disalin ke clipboard!");
+      } catch (err) {
+        showToast("Gagal menyalin konfigurasi.");
+      }
+    }
+
+    /* =========================================================================
+       10. UTILITIES & EVENT LISTENERS
+       ========================================================================= */
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById("toastMessage");
+      toast.textContent = msg;
+      toast.style.opacity = "1";
+      toast.style.transform = "translate(-50%, 0)";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translate(-50%, 12px)";
+      }, 2600);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replace(/'/g, "&#39;");
+    }
+
+    glowTriggerBtn.addEventListener("click", triggerMainExplosion);
+    document.getElementById("replayBtn").addEventListener("click", replayExperience);
+
+    document.getElementById("closeModalBtn").addEventListener("click", closeLetterModal);
+    document.getElementById("closeModalFooterBtn").addEventListener("click", closeLetterModal);
+    document.getElementById("prevLetterBtn").addEventListener("click", () => navigateLetter(-1));
+    document.getElementById("nextLetterBtn").addEventListener("click", () => navigateLetter(1));
+    letterModal.addEventListener("click", (e) => {
+      if (e.target === letterModal) closeLetterModal();
+    });
+
+    document.getElementById("soundToggleBtn").addEventListener("click", () => {
+      state.soundEnabled = !state.soundEnabled;
+      document.getElementById("soundIconOn").classList.toggle("hidden", !state.soundEnabled);
+      document.getElementById("soundIconOff").classList.toggle("hidden", state.soundEnabled);
+      showToast(state.soundEnabled ? "Efek suara aktif" : "Efek suara dimatikan");
+    });
+
+    // Tombol Settings sekarang selalu memicu modal Password terlebih dahulu
+    document.getElementById("openSettingsBtn").addEventListener("click", openPasswordModal);
+    document.getElementById("closeSettingsBtn").addEventListener("click", closeSettings);
+    document.getElementById("applySettingsBtn").addEventListener("click", applySettings);
+    document.getElementById("copyConfigBtn").addEventListener("click", copyConfigJson);
+    settingsBackdrop.addEventListener("click", (e) => {
+      if (e.target === settingsBackdrop) closeSettings();
+    });
+
+    cfgHeroPhotoFile.addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      cfgHeroPhotoUrl.value = URL.createObjectURL(file);
+      showToast("Foto bersama siap diterapkan!");
+    });
+
+    document.getElementById("addMemberBtn").addEventListener("click", () => {
+      draftMembers.push({
+        id: Date.now(),
+        name: "Anggota Baru",
+        division: "Divisi Robotik",
+        photo: "https://placehold.co/400x500/1e293b/f5d08a?text=Foto+Anggota",
+        message: "Selamat Hari Guru! Terima kasih atas semua ilmu, kesabaran, dan bimbingannya untuk tim robotik kami."
+      });
+      renderSettingsMembers();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (!passwordModal.classList.contains("hidden")) closePasswordModal();
+        if (!letterModal.classList.contains("hidden")) closeLetterModal();
+        if (!settingsBackdrop.classList.contains("hidden")) closeSettings();
+      } else if (!letterModal.classList.contains("hidden")) {
+        if (e.key === "ArrowRight") navigateLetter(1);
+        if (e.key === "ArrowLeft") navigateLetter(-1);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      initAmbientParticles();
+    });
+
+    window.onload = function () {
+      resizeCanvas();
+      initAmbientParticles();
+      renderHeroContent();
+      animateCanvas();
+    };
+  </script>
+</body>
+</html>
